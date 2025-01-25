@@ -1,0 +1,4 @@
+#!/bin/bash
+
+pid=$(pidof polybar)
+polybar-msg cmd toggle

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+case "$1" in
+    *.png|*.jpg|*.jpeg|*.gif|*.bmp|*.webp|*.svg|*.ico|*.tiff|*.tif)
+        ueberzug layer --parser bash <<EOF
+        {
+            "action": "add",
+            "identifier": "preview",
+            "path": "$1",
+            "x": $2,
+            "y": $3,
+            "width": $4,
+            "height": $5
+        }
+EOF
+        ;;
+    *)
+        exit 1 # No preview for other file types
+        ;;
+esac
+

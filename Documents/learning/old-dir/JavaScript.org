@@ -1,0 +1,313 @@
+#+title: Java Script
+* varibles
+let var_name = "value";
+** define later
+let var_name1, var_name2, var_name3;
+defining
+var_name1 = "value"
+var_name2 = "value"
+var_name3 = "value"
+
+* anonymous function
+ syntax:
+var var_name = function fun_name(parameters){
+expression
+}
+example :
+var x = function cal(a,b){
+return a + b
+}
+
+*   object
+var var_name = {
+key: "value",
+key1: "value1",
+method or fuction
+}
+
+declaration:
+console.log(var_name);
+console.log(var_name.key);
+
+*   conditonal statments
+** if condition
+syntax:
+  if (condition){
+  statement
+  }
+var x = 2 > 1;
+if(x){
+console.log("true")
+}
+or
+var x = 1;
+var y = 2;
+
+if (x > y){
+console.log("true")
+}
+**   Alternative for if and else
+var_name
+? statement -----------> if true
+: statement -----------> if false
+
+**   Switch
+syntax:
+switch(parameters){
+case N:
+     statement
+break; (to control flow of execution)
+case N:
+     statement
+default:
+     statement
+}
+**   do while
+syntax:
+do{ ----------------------> check (2)
+statement -------------> this is statement executed at leaset one time even the condition is false
+}
+while(condition){ ---------> check (1)
+statement
+}
+**   for loop
+syntax:
+for(initialization,condition,Inicrement/Decrement){
+}
+** interpolation
+`strings ${var} strings`
+
+*   functions
+
+function fun_name(parameters){
+statments                     <--
+}                                |
+                                 |
+call fuction                     |
+fun_name(argument);              |
+**   HIGHER ORDER FUNCTION        v
+function fun_name(parameters,callback_fun_name){
+fun_name_for_callback(callback_fun_parameters')            ---------------------> fun_name to invoke inside this function as parameters(we can invoke where we want)
+statement
+}
+calling     HIGER ORDER FUNCTION
+ fun_name(parameters,callback_fun)  ----------------------------->just pass the function as argument. don't invoke it [fun_name() ----> wrong]
+                                                                 > its parameters should given inside the main functon as normal
+*  array iterations
+** forEach
+array.forEach(functions)
+**   for callback function
+array.forEach(fun_name)
+**   for annonymous function
+array.forEach( function (parameters){statements and parameters} )
+**   map
+declaration:
+array.map(function)
+to change array keys and values
+var_name = array.map(function(parameters){
+return {key: parameter.value
+        key: parameter.value}
+})
+calling :
+var_name
+** for normal function
+function fun_name(parameters){
+return var_name = {
+key: parameter.value
+key: parameter.value
+}
+}
+**   filter
+does return new array
+can manipulate the size of new array
+return based on condition
+**   find
+returns single instance
+returns first match, if no match - undefined
+great for getting unique values
+it only return matched objects unlike unlike filter and map
+( when comparing with filter and map this one looks similar but when observer carefully it only return obeject(but filter first returns array and then object) )
+
+**   reduce
+iterates, callback functions
+reduce to a single value - number, array, object
+1 parameter ('acc') - total of all calculations
+2 paramater ('curr') - current iteration/value
+**   syntax: for annonymous functons
+var var_name =  array.reduce(function('acc's paramater, curr's paramater){
+console.log('current:' acc's_paramater.value)
+console.log('current:' curr's_paramater.value)
+acc += curr's_paramater.value
+return acc ---------------> must ( to iterate all obejects )
+}, x );
+   \-------------> x = number (starting number) , array , string  ( initializar )
+* DOM
+**   adding a HTML elemnt/tag in js  SIMPLIEFIED BY ( addeventListener )
+( write a function in js and call it html tag / element )
+***   declareing a function in js
+funciton fun_name(parameters){
+statements / for examples
+document.querySelector('') ---------> calling a html tag
+
+}
+***   calling in html tag / element
+<element event='fun_name(parameters)'
+example:
+<input keypress='fun_name()'   />
+document.querySelector('')
+.x(for class) , #x(for id) , just like css
+to add items list > document.create
+**   difference between textContent and innerText when concatination > textContent displays even if display set to hidden (process lightweight)
+    Use the textContent property to return the concatenation of the textContent of every child node. You can use it to set a text for a node.
+    The innerText returns the human-readable text that takes CSS into account.
+**   calling this as a function inside a HTLM element or tag
+
+** addeventListener ( pure js and html  )
+with this addeventListener we can call functions  inside the js.
+1) Get the HTML element / tag
+   2) Attch an event to the element / tag
+      3) write a function for event handling
+syntax:
+obj.addeventListener('event' function',useCapture)    ---------------> inner function or external function  ( useCapture is optional )
+let var_name = document.querySelector('')        -----------> getting HTML element / tag in js
+var_name.addeventListener('click',fuction(){
+         write a code or declare a funciton
+});
+**   user input text
+<input type="text" id="" > --------> in html
+input_id.addeventListener( function() {
+html_tag.innerText = input_id.value
+})
+
+*   adding attribues to created html tag / element
+tag.id = 'id_name'     ( don't decare like varibles [ don't use let,const or var before it ] )
+tag.className = 'class_name'
+tag.textContent = 'text'
+script.src = '/.file.js'
+**   cloneNode() method
+syntax: let clonedNode = originalNode.cloneNode(deep);
+How it works
+    First, select the <tag> with the id menu by using the querySelector() method.
+    Second, create a deep clone of the <tag> element using the cloneNode() method.
+    Third, change the id of the cloned element to avoid duplicate.
+    Finally, append the CLONED ELEMENT to the child nodes of the document.body using the appendChild() method.
+*   parent child sibling elementes
+elementnode.parentNode --------------> parentNode
+likewise
+           .parentNode
+           .children
+           .firstChild
+           .lastChild
+           .firstElementChild
+           .lastElementChild
+           .nextElementSibling
+           .previousElementSibling
+The firstChild and lastChild return the first and last child of a node, which can be any node type including text node, comment node, and element node.
+*   classList
+syntax: element.classList('className')
+    The element’s classList property returns the live collection of CSS classes of the element.
+    Use add() and remove() to add CSS classes to and remove CSS classes from the class list of an element.
+    Use replace() method to replace an existing class with a new one.
+    Use contains() method to check if the class list of an element contains a specified class.
+    Use the toggle() method to toggle a class.
+*   loading
+document.addEventListener('DOMContentLoaded',() => {
+    // handle DOMContentLoaded event
+});
+
+document.addEventListener('load',() => {
+    // handle load event
+});
+
+document.addEventListener('beforeunload',() => {
+    // handle beforeunload event
+});
+
+document.addEventListener('unload',() => {
+    // handle unload event
+});
+*   CustomEvent
+**   write a  custom function
+function custom_fun(parameters){
+let event_name = new CustomEvent('custom_event_name',function(){
+detail{
+addEvt_para: paramater, --------------> color: col,
+addEvt_para: paramater
+}
+})
+dispatchEvent(event_name);
+}
+**   adding customevnt to addEventListener
+element.addEventListener('custom_event_name', funciton(e){
+element.style.color = e.detail.paramater
+element.style.color = e.detail.2ndparamater
+})
+
+Use the CustomEvent() constructor to create a custom event and dispatchEvent() to trigger the event.
+
+*   timer
+** setInterval(callback_fun, interval_time) { function referance }
+**  clearTimeout(callback_fun, delay) { function referance }
+*   OOPS CONCEPT
+**   class
+class Name{
+constructor(parameters){
+tthis.para = name;
+hthis.para = name;
+is.para = name;
+}
+fun(){
+code
+}
+}
+***   declaring class
+let obj = new Name(parameters)
+*   arguments in functions
+function fun(){
+console.log(arguments)
+}
+fun('name',name1','name2')
+*   passing objects in function
+**   function test(obj){
+	console.log(obj.x,obj.y)
+}
+test({
+	x: 'tron',
+	y: 'lagacy'
+})
+
+output: tron lagacy
+**   passing parameters as variable
+function test(obj){
+const {fname,lname} = obj;
+//the above means simple
+// const fname = obj;
+// const lname = obj;
+console.log(fname,lname)
+}
+
+test({
+fname: 'tron',
+lname: 'lagacy'
+})
+
+output: tron
+        lagacy
+***   incase want to change parameter value  ( destructuring )
+function test(obj){
+const {fname: nname,lname} = obj; ---> change here
+//the above means simple
+// const nname = obj;      --------> change here
+// const lname = obj;
+console.log(fname,lname)
+}
+
+test({
+fname: 'tron',
+lname: 'lagacy'
+})
+*   import and export files in javascript
+1)export default fun_name;
+  import fun_name from 'path'
+2) export const var_name = [{....}]
+   import { var_name } from 'path'

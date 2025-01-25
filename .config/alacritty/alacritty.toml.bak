@@ -1,0 +1,385 @@
+[window]
+decorations = "full"
+opacity = 0.6
+
+  [window.padding]
+  x = 9
+  y = 9
+
+[font.normal]
+family = "Source Code Pro Semibold"
+style = "Italic"
+
+[font.bold]
+family = "DejaVu Sans Mono"
+style = "Bold"
+
+[font.offset]
+x = 0
+y = 0
+
+[colors.primary]
+background = "#191919"
+foreground = "#55aaff"
+
+[colors.vi_mode_cursor]
+text = "CellBackground"
+cursor = "#39FF00"
+
+[colors.selection]
+text = "#191919"
+background = "#d8dee9"
+
+[colors.normal]
+black = "#191919"
+red = "#b02626"
+green = "#40a62f"
+yellow = "#f2e635"
+blue = "#314ad0"
+magenta = "#b30ad0"
+cyan = "#32d0fc"
+white = "#acadb1"
+
+[colors.bright]
+black = "#36393d"
+red = "#ce2727"
+green = "#47c930"
+yellow = "#fff138"
+blue = "#2e4bea"
+magenta = "#cc15ed"
+cyan = "#54d9ff"
+white = "#dbdbdb"
+
+[colors.dim]
+black = "#676f78"
+red = "#b55454"
+green = "#78a670"
+yellow = "#faf380"
+blue = "#707fd0"
+magenta = "#c583d0"
+cyan = "#8adaf1"
+white = "#e0e3e7"
+
+[cursor]
+blink_interval = 150
+unfocused_hollow = false
+thickness = 0.3
+
+  [cursor.style]
+  shape = "Underline"
+  blinking = "Always"
+
+[[keyboard.bindings]]
+key = "P"
+mods = "Alt"
+action = "Paste"
+
+[[keyboard.bindings]]
+key = "Insert"
+mods = "Shift"
+action = "Paste"
+
+[[keyboard.bindings]]
+key = "Slash"
+mods = "Control"
+chars = "gc"
+
+[[keyboard.bindings]]
+key = "Y"
+mods = "Control"
+action = "Copy"
+
+[[keyboard.bindings]]
+key = "Key0"
+mods = "Control"
+action = "ResetFontSize"
+
+[[keyboard.bindings]]
+key = "Equals"
+mods = "Control"
+action = "IncreaseFontSize"
+
+[[keyboard.bindings]]
+key = "Plus"
+mods = "Control"
+action = "IncreaseFontSize"
+
+[[keyboard.bindings]]
+key = "Minus"
+mods = "Control"
+action = "DecreaseFontSize"
+
+[[keyboard.bindings]]
+key = "Space"
+mods = "Control"
+mode = "Vi"
+action = "ScrollToBottom"
+
+[[keyboard.bindings]]
+key = "Space"
+mods = "Control"
+action = "ToggleViMode"
+
+[[keyboard.bindings]]
+key = "I"
+mode = "Vi"
+action = "ScrollToBottom"
+
+[[keyboard.bindings]]
+key = "I"
+mode = "Vi"
+action = "ToggleViMode"
+
+[[keyboard.bindings]]
+key = "C"
+mods = "Control"
+mode = "Vi"
+action = "ScrollToBottom"
+
+[[keyboard.bindings]]
+key = "C"
+mods = "Control"
+mode = "Vi"
+action = "ToggleViMode"
+
+[[keyboard.bindings]]
+key = "Escape"
+mode = "Vi"
+action = "ClearSelection"
+
+[[keyboard.bindings]]
+key = "Y"
+mods = "Control"
+mode = "Vi"
+action = "ScrollLineUp"
+
+[[keyboard.bindings]]
+key = "E"
+mods = "Control"
+mode = "Vi"
+action = "ScrollLineDown"
+
+[[keyboard.bindings]]
+key = "G"
+mode = "Vi"
+action = "ScrollToTop"
+
+[[keyboard.bindings]]
+key = "G"
+mods = "Shift"
+mode = "Vi"
+action = "ScrollToBottom"
+
+[[keyboard.bindings]]
+key = "B"
+mods = "Control"
+mode = "Vi"
+action = "ScrollPageUp"
+
+[[keyboard.bindings]]
+key = "F"
+mods = "Control"
+mode = "Vi"
+action = "ScrollPageDown"
+
+[[keyboard.bindings]]
+key = "U"
+mods = "Control"
+mode = "Vi"
+action = "ScrollHalfPageUp"
+
+[[keyboard.bindings]]
+key = "D"
+mods = "Control"
+mode = "Vi"
+action = "ScrollHalfPageDown"
+
+[[keyboard.bindings]]
+key = "Y"
+mode = "Vi"
+action = "Copy"
+
+[[keyboard.bindings]]
+key = "Y"
+mode = "Vi"
+action = "ClearSelection"
+
+[[keyboard.bindings]]
+key = "V"
+mode = "Vi"
+action = "ToggleNormalSelection"
+
+[[keyboard.bindings]]
+key = "V"
+mods = "Shift"
+mode = "Vi"
+action = "ToggleLineSelection"
+
+[[keyboard.bindings]]
+key = "V"
+mods = "Control"
+mode = "Vi"
+action = "ToggleBlockSelection"
+
+[[keyboard.bindings]]
+key = "V"
+mods = "Alt"
+mode = "Vi"
+action = "ToggleSemanticSelection"
+
+[[keyboard.bindings]]
+key = "Return"
+mode = "Vi"
+action = "Open"
+
+[[keyboard.bindings]]
+key = "K"
+mode = "Vi"
+action = "Up"
+
+[[keyboard.bindings]]
+key = "J"
+mode = "Vi"
+action = "Down"
+
+[[keyboard.bindings]]
+key = "H"
+mode = "Vi"
+action = "Left"
+
+[[keyboard.bindings]]
+key = "L"
+mode = "Vi"
+action = "Right"
+
+[[keyboard.bindings]]
+key = "Up"
+mode = "Vi"
+action = "Up"
+
+[[keyboard.bindings]]
+key = "Down"
+mode = "Vi"
+action = "Down"
+
+[[keyboard.bindings]]
+key = "Left"
+mode = "Vi"
+action = "Left"
+
+[[keyboard.bindings]]
+key = "Right"
+mode = "Vi"
+action = "Right"
+
+[[keyboard.bindings]]
+key = "Key0"
+mode = "Vi"
+action = "First"
+
+[[keyboard.bindings]]
+key = "Key4"
+mode = "Vi"
+action = "Last"
+
+[[keyboard.bindings]]
+key = "Key6"
+mods = "Shift"
+mode = "Vi"
+action = "FirstOccupied"
+
+[[keyboard.bindings]]
+key = "H"
+mods = "Shift"
+mode = "Vi"
+action = "High"
+
+[[keyboard.bindings]]
+key = "M"
+mods = "Shift"
+mode = "Vi"
+action = "Middle"
+
+[[keyboard.bindings]]
+key = "L"
+mods = "Shift"
+mode = "Vi"
+action = "Low"
+
+[[keyboard.bindings]]
+key = "B"
+mode = "Vi"
+action = "SemanticLeft"
+
+[[keyboard.bindings]]
+key = "W"
+mode = "Vi"
+action = "SemanticRight"
+
+[[keyboard.bindings]]
+key = "E"
+mode = "Vi"
+action = "SemanticRightEnd"
+
+[[keyboard.bindings]]
+key = "B"
+mods = "Shift"
+mode = "Vi"
+action = "WordLeft"
+
+[[keyboard.bindings]]
+key = "W"
+mods = "Shift"
+mode = "Vi"
+action = "WordRight"
+
+[[keyboard.bindings]]
+key = "E"
+mods = "Shift"
+mode = "Vi"
+action = "WordRightEnd"
+
+[[keyboard.bindings]]
+key = "Key5"
+mods = "Shift"
+mode = "Vi"
+action = "Bracket"
+
+[[keyboard.bindings]]
+key = "Slash"
+mode = "Vi"
+action = "SearchForward"
+
+[[keyboard.bindings]]
+key = "Slash"
+mods = "Shift"
+mode = "Vi"
+action = "SearchBackward"
+
+[[keyboard.bindings]]
+key = "N"
+mode = "Vi"
+action = "SearchNext"
+
+[[keyboard.bindings]]
+key = "N"
+mods = "Shift"
+mode = "Vi"
+action = "SearchPrevious"
+
+[[keyboard.bindings]]
+key = "Minus"
+mods = "Alt"
+
+  [keyboard.bindings.command]
+  program = "alacritty"
+  args = [ "-e", "opacity-decrease" ]
+
+[[keyboard.bindings]]
+key = "Equals"
+mods = "Alt"
+
+  [keyboard.bindings.command]
+  program = "alacritty"
+  args = [ "-e", "opacity-increase" ]
+

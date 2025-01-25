@@ -1,0 +1,70 @@
+* To insert text in a file (>) use >> for the end of the line
+cat <file name> > <existing file>  or new a file will be created automatically
+echo <type text> <existing file>  "
+
+
+# To insert a text in a certain line
+ sed -i '<line no.>i <text>'
+
+to set variable 
+varible=value
+* as full sentence
+var="this is example"
+(single or double quets)
+#To list all variables run "printevn" 
+** for particular var "printenv var" or echo $var
+#To set as global run "export var" which means child shells can also access
+#to remove run "unset var"
+
+
+
+
+
+PATH=$PATH:/path/to/<dir>
+PATH=$PATH:. (add currently in directory to path)
+
+* chroot - for arch linux
+ mount /dev/sdx /mnt ---> #(x = root partition)
+ mount /dev/sdx /mnt/boot/efi ----> #(boot partition[if efi]))
+ arch-chroot /mnt
+ (now you're in arch)
+
+
+*   awk
+**   syntax: awk arg '{print $n,$n}' file-name #n for field
+to know number of fields exits in file NF
+to print last field $NF
+OFS (output field separator) variable to put a separator between fields
+example: 'OFS="/" {print $n,$n}'
+**   argments -F (for delimeter eg:- -F '-')
+
+**  BEGIN AND END
+   A BEGIN rule is executed once before any text processing starts. In fact, it’s executed before awk even reads any text. An END rule is executed after all processing has completed. You can have multiple BEGIN and END rules, and they’ll execute in order.
+
+For our example of a BEGIN rule, we’ll print the entire quote from the file_name.
+
+To do so, we type this command:
+
+awk 'BEGIN {print "some text to print begining of the file as first field"} {print $n}' file-name
+output will be : that text
+                 fields
+
+we can do mathmatial operations using BEGIN  without  giving file_name
+examples: awk 'BEGIN { print sqrt((2+3)*5)}' > output: 25
+          awk 'BEGIN {print atan2(0, -1)*100}' > output: 314.159
+          awk 'BEGIN {print atan2(0, -1)}' > output: 3.14159
+**   to print a field usig arthemetic operators
+pattern: awk -F '$n y x {print $n}'
+example awk -F '$1 >= 100 {print $2}' ---> checking $2  with $1 's value which is more than 100
+first $n is field that used to check in file
+y = athmetica operator
+x = numbers
+
+**   find  and print
+pattern: awk '/text/ {print $1}' file_name >> it will print text if it exist in file_name, increase field to increase row
+with REgx ^text which means search all text that with text
+* password/security
+
+* git
+adding 1s after github (to see files in tree formate)
+github.com > github1s.com

@@ -1,0 +1,16 @@
+to set variable 
+varible=value
+* as full sentence
+var="this is example"
+(single or double quets)
+#To list all variables run "printevn" 
+*for particular var "printenv var" or echo $var
+#To set as global run "export var" which means child shells can also access
+#to remove run "unset var"
+
+
+
+
+
+PATH=$PATH:/path/to/<dir>
+PATH=$PATH:. (add currently in directory to path)

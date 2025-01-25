@@ -1,0 +1,39 @@
+#+title: Jsx
+
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import js file / function :
+       import File_name  from 'path'
+
+const root = document.querySelector('#root')
+const root_render = ReactDOM.createRoot(root)
+root_render(
+// different way to declare
+<>
+<h1> heading </h2>
+<Function_name />
+</>
+)
+*
+* Declaring a variable in jsx is in {variable}
+
+
+* styles
+**  inline style
+style={{color:'red',fontSize:'22px'}}
+**  internal styles
+const obj = {
+selector_2:{
+property: 'value',
+property: 'value'
+}
+selector_2:{
+property: 'value'
+}
+}
+*** refering abole styles
+example:
+<h2 style={obj.selector_1} className='foo'> this is h2 </h2>
+*   external styles
+just import css file in index.js :
+import 'css_file_path'
