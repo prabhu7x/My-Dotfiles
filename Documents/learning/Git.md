@@ -26,6 +26,7 @@
 #### Exceptions
 `!path/to/file`
 ### Include Specific Subfolder Without Including Everything Else
+*we can't add subfolder directly, first we need to add it's parent folder and then add subfolder logically, which is explained below*
 
 Here's how to include only Documents/learnings/ while ignoring everything else in Documents/:
 

@@ -4,7 +4,7 @@
 !.config/alacritty
 !.config/dunst
 !.config/fish
-!.config/i3
+!.config/i3/config
 !.config/lf
 !.config/mpv
 !.config/polybar
