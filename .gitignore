@@ -1,0 +1,25 @@
+/*
+!.config/
+.config/*
+!.config/alacritty
+!.config/dunst
+!.config/fish
+!.config/i3
+!.config/lf
+!.config/mpv
+!.config/polybar
+!.config/ranger
+!.config/rofi
+!.config/yazi
+!.config/kdeglobals
+!.config/picom.conf
+!Documents/
+Documents/*
+!Documents/learning/
+!/scripts/
+!.fonts/
+!.local/
+.local/*
+!.local/bin/
+
+git rm -r --cached .config/dmenu-flexipatch
