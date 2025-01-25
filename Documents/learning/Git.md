@@ -16,3 +16,22 @@
 - install gh-pages 
 - npm i gh-pages -D
 - add **homepage** after version and in script section add **predeploy** : *npm run build* and **deploy** : *gh-pages -d build* in package.json
+
+
+
+#### ignore everything
+- /*
+#### ignore file or folder
+`path/to/file`
+#### Exceptions
+`!path/to/file`
+### Include Specific Subfolder Without Including Everything Else
+
+Here's how to include only Documents/learnings/ while ignoring everything else in Documents/:
+
+#### Include Documents directory
+` !Documents/ `
+#### Ignore everything inside Documents
+` Documents/* `     
+#### Include only the learnings folder inside Documents
+` !Documents/learnings/ `
