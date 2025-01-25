@@ -1,0 +1,4 @@
+#!/bin/sh
+
+#alacritty -t rectangleX --config-file ~/scripts/alacritty/alacritty.yml -e ranger
+alacritty --class scratchpad -t rectangleX -e ranger

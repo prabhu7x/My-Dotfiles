@@ -1,0 +1,10 @@
+#!/bin/bash
+
+SELECT=$(echo -e "Internal\nExternal\nMobile\nuMobile" | dmenu -p 'which DRIVES you want to mount.?')
+#b=$(notify-send -t 2000 "Mounted to /Mobile")
+case $SELECT in 
+"Internal")dmount;;
+"External")exec ~/scripts/dmnt;;
+"Mobile") echo "ok" | dmenu -p "Make sure that 'USB file transfer check in your android device'" ; simple-mtpfs ~/Mobile/ ; notify-send -t 2000 "Mount to Mobile" ;;
+"uMobile")$(fusermount -u ~/Mobile/) ; notify-send -t 3000 "unmounted";;
+esac

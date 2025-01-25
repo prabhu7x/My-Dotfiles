@@ -1,0 +1,12 @@
+#! /bin/fish
+
+set current_opacity (grep opacity: ~/.config/alacritty/alacritty.yml | grep -E -o '[0-9.]+')
+
+set increase_opacity (math $current_opacity + 0.1)
+
+if test $current_opacity -ge 0.1 -a $increase_opacity -le 1.0
+    sed -i "s/ $current_opacity/ $increase_opacity/" ~/.config/alacritty/alacritty.yml
+    notify-send --replace-id=14 -t 2000 "opacity is $increase_opacity"
+else 
+    notify-send --replace-id=14 -t 2000 " Opacity reached Max"
+end

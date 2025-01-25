@@ -1,0 +1,7 @@
+#!/bin/sh
+
+#exec dmenu_run -p "enter text" -l 2 
+#kdeconnect-cli -n path7 --share-text $(read)
+read -p "enter text: " text
+exec kdeconnect-cli -n path7 --share-text "$text"
+

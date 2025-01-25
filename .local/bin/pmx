@@ -1,0 +1,5 @@
+#! /bin/bash
+
+alacritty -t rectangleX -e pulsemixer &
+#alacritty --config-file ~/scripts/alacritty/alacritty.yml -t rectangleX -e pulsemixer &
+#alacritty -t rectangleX --config-file ~/scripts/alacritty/alacritty.yml -e pulsemixer

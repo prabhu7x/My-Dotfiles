@@ -1,0 +1,5 @@
+#!/bin/sh
+
+read -p "enter url: " url
+exec kdeconnect-cli -n path7 --share $url
+

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+alacritty msg create-window -t ala1x
+#alacritty --config-file ~/scripts/alacritty/alacritty.yml; -t ala1x msg create-window  
