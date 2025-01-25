@@ -1,0 +1,10 @@
+#!/bin/bash
+
+a="$(checkupdates | wc -l)"
+
+if [ $a -eq 0 ]
+then 
+notify-send -u low "No updates available"
+else
+	notify-send -u normal "$(checkupdates | wc -l) Package Updates Available"
+fi

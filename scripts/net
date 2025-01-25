@@ -1,0 +1,215 @@
+#! /bin/bash
+
+. /usr/lib/network/network
+
+DEBUG=1
+
+out() {
+  if [ $DEBUG -eq 1 ]; then
+    if [ "$1" != "" ]; then echo $1; fi
+  elif [ "$2" != "" ]; then
+    echo $2
+  fi
+}
+
+#RESULTF=$1
+
+# ************* Select appropriate Dialog
+if [ "$DISPLAY" != "" ]; then
+    DIALOG=$(which Xdialog)
+    if [ "$DIALOG" == "" ]; then
+       echo "Please install 'dialog' to use netcfg-menu"
+       exit 1
+    fi
+    if [ -f /home/mark/.gtkrc-2.0 ]; then XTRA="--rc-file /home/mark/.gtkrc-2.0"; fi
+    SIZE="20 80 13"
+else
+    DIALOG=$(which dialog)
+    if [ "$DIALOG" == "" ]; then
+       echo "Please install 'dialog' to use netcfg-menu"
+       exit 1
+    fi
+    SIZE="19 60 12"
+fi
+
+# ************* Find devices
+out "Find interfaces used in profiles"
+declare -A wired_devs
+declare -A wireless_devs
+while read prof; do
+    iface=$(. "$PROFILE_DIR/$prof"; echo "$INTERFACE");
+    if [ -d "/sys/class/net/$iface" ]; then
+        case $(. "$PROFILE_DIR/$prof"; echo "$CONNECTION") in
+            wireless) wireless_devs[$iface]=$iface; ;;
+            ethernet) wired_devs[$iface]=$iface; ;;
+        esac
+    fi
+done < <(list_profiles | sort)
+out "${GOOD}Found: [Wired] ${wired_devs[@]}, [Wireless] ${wireless_devs[@]}"
+
+
+# ************* Ethernet
+declare -A connected_devs
+declare -A unconnected_devs
+out "Test wired interface carrier"
+if [ ${#wired_devs[@]} -gt 0 ]; then
+    for i in "${wired_devs[@]}"; do
+        # ** Bring up device (some might report flawed carrier status when down)
+        up=$(ifconfig -s | grep $i | wc -l)
+        if [ $up -eq 0 ]; then
+            ifconfig $i up
+            bring_down="$bring_down $i"
+        fi
+        # ** Test connectivity
+        if [ -f /sys/class/net/$i/carrier ]; then
+            carrier=$(cat /sys/class/net/$i/carrier)
+            if [ "$carrier" -gt 0 ]; then
+                connected_devs["$i"]=$i
+            else
+                unconnected_devs["$i"]=$i
+            fi
+        else
+            # * no carrier status available, somethings wrong
+            unconnected_devs["$i"]=$i
+        fi
+        # heere
+        if [ $up -eq 0 ]; then
+            ifconfig $i down
+        fi
+    done
+    out "${GOOD}Connected: ${connected_devs[@]}, ${BAD}disconnected: ${unconnected_devs[@]}"
+fi
+
+# ************* WLAN
+# **** find usable devices
+if [ ${#wired_devs[@]} -gt 0 ]; then
+    out "Look for rfkill'd interfaces"
+    declare -A killed
+    for i in /sys/class/rfkill/rfkill*; do name=$(cat ${i}/name) killed["$name"]=$(cat ${i}/state); done
+
+    declare -A killed_devs
+    declare -A living_devs
+    for dev in "${wireless_devs[@]}"; do
+        file=/etc/network.d/interfaces/$dev
+        if [ -f "$file" ]; then
+            name=$(. $file; echo $RFKILL_NAME)
+            if [ "$name" != "" ]; then
+                if [ "${killed["$name"]}" == "2" ]; then
+                killed_devs["$dev"]=$dev;
+              else
+                living_devs["$dev"]=$dev;
+              fi
+            else
+              living_devs["$dev"]=$dev;
+            fi
+        else
+            living_devs["$dev"]=$dev
+        fi
+    done
+    out "killed: ${killed_devs[@]}, still alive: ${living_devs[@]}"
+    # **** Find AP's
+    if [ ${#living_devs[@]} -gt 0 ]; then
+        # ** Bring up all wlan devices (some might refuse to scan when down)
+        bring_down=""
+        WLAN_AVAILABLE=0
+        for i in "${living_devs[@]}"; do
+            if [ "${wireless_devs[$i]}" == "$i" ]; then
+                WLAN_AVAILABLE=1
+                up=$(ifconfig -s | grep $i | wc -l)
+                if [ $up -eq 0 ]; then
+                    ifconfig $i up
+                    bring_down="$bring_down $i"
+                fi
+            fi
+        done
+        # ** Look for AP's
+        if [ $WLAN_AVAILABLE -eq 1 ]; then
+            out "Look for Wifi AP's"
+            declare -A AVAIL_ESSIDS
+            ef=$(mktemp)
+            iwlist scanning 2>/dev/null | egrep -i "essid|completed" | sed "s/ *ESSID:\"\([^\"]*\)\"/\1:::/g" | sed "s/^\(\S\+\)\s\+Scan completed :/AVAIL_ESSIDS[\"\1\"]=\"/g" | tr -d "\n" | sed "s/:::\([^$]\)/ \1/g" | sed "s/:::/\"\n/g" > $ef
+            . $ef
+        fi
+        # Bring down the formerly brought up devices
+        if [ ! "$bring_down" == "" ]; then
+            for i in $bring_down; do
+                ifconfig $i down
+            done
+        fi
+        echo "Available AP's: ${AVAIL_ESSIDS[@]}"
+    fi
+fi
+
+# ************* Look for available profiles
+out "Look for available profiles"
+i=0
+while read prof; do
+    IFACE=$(. "$PROFILE_DIR/$prof"; echo "$INTERFACE")
+
+    if [ ! "${killed_devs["$IFACE"]}" == "1" ]; then
+        onl=1
+        CONNECTION=$(. "$PROFILE_DIR/$prof"; echo "$CONNECTION")
+        if [ "$CONNECTION" == "wireless" ]; then
+            ESSID=$(. "$PROFILE_DIR/$prof"; echo "$ESSID")
+            onl=$(echo "${AVAIL_ESSIDS["$IFACE"]}" | grep "$ESSID" | wc -l)
+        fi
+        if [ "$CONNECTION" == "ethernet" -a "${unconnected_devs["$IFACE"]}" == "$IFACE" ]; then
+                onl=0
+        fi
+        if [ $onl -gt 0 ]; then
+            [[ "$prof" = "eth" ]] && DEFAULT="main"
+            profiles[$i]="$prof"
+            let i++
+            profiles[$i]="$(. "$PROFILE_DIR/$prof"; echo "$DESCRIPTION")"
+            let i++
+        fi
+    fi
+done < <(list_profiles | sort)
+echo "Available Profiles: ${profiles[@]}"
+
+check_make_state_dir
+
+rm -f "$STATE_DIR/menu"
+
+#RESULTF=$(mktemp)
+
+if [[ ${#profiles} -eq 0 ]]; then
+    exit_err "No profiles were found in $PROFILE_DIR"
+fi
+
+[[ -n "$NETWORKS_MENU_DEFAULT" ]] && DEFAULT="$NETWORKS_MENU_DEFAULT"
+# if no default yet, use the first entry
+[[ -z "$DEFAULT" ]] && DEFAULT="${profiles[0]}"
+ANSWER=$(mktemp --tmpdir menu.XXXXXXXX) || exit 1
+
+# Set timeout
+if [[ -z "$1" ]]; then
+    TIMEOUT="0"
+else
+    TIMEOUT="$1"
+fi
+
+# Display Dialog
+$DIALOG $XTRA --stdout --timeout "$TIMEOUT" --default-item "$DEFAULT" --menu "Select the network profile you wish to use" $SIZE "${profiles[@]}" > "$ANSWER" 2>/dev/null
+ret=$?
+
+case $ret in
+    1) ;; # Cancel - do nothing
+    255) # timeout - use default
+        #profile_up "$DEFAULT"       # JP: use profile_up and catch $?
+        #ret=$?
+        #if [[ $ret -eq 0 ]]; then echo "$DEFAULT" > "$STATE_DIR/menu"; fi
+        ;;
+    0)  # User selection
+        profile_up "$(cat "$ANSWER")"
+        ret=$?
+        if [[ $ret -eq 0 ]]; then mv "$ANSWER" "$STATE_DIR/menu"; fi
+        ;;
+    *)  # Shouldnt happen
+        exit_err "Abnormal ret code from dialog: $ret"
+        ;;
+esac
+rm -f "$ANSWER"     # JP: add -f
+exit $ret           # JP: exit with caught $?
+
+# vim: ft=sh ts=4 et sw=4:

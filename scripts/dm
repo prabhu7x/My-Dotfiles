@@ -1,0 +1,8 @@
+#!/bin/bash
+
+SELECT=$(echo -e "Internal\nExternal" | $(cat $d7)
+
+case $SELECT in 
+"Internal")dmount;;
+"External")exec ~/scripts/dmnt;;
+esac

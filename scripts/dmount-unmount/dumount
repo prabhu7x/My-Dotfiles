@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#### DO NOT TOUCH
+for i in $(mount | grep /media | cut -d " " -f 1); do
+    devices="${devices}${i}\n"
+done
+
+device=$(echo -e "${devices}" | dmenu $DMENUSETTINGS)
+
+if [ -n "$device" ]; then
+   udisksctl unmount -b $device
+fi

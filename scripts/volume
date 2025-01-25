@@ -1,0 +1,4 @@
+#/bin/bash
+
+volume=$(amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }')
+notify-send -h string:frcolor:#B59234 -h int:value:$volume volume -t 1000

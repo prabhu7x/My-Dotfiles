@@ -1,0 +1,5 @@
+#!/bin/sh
+
+volume=$(pactl get-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo | grep front-left | awk '{print $5}')
+
+notify-send  -t 1000 -h string:frcolor:#B59234 -h int:value:$volume volume
