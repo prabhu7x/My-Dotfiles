@@ -47,10 +47,10 @@ class Drag_single_file_from_group_ICON_MULTI_DIR(Command):
 	def execute(self):
 			self.fm.execute_console('shell dragon -i %c &')
 
-# class Copy_Full_Path(Command):
-# 	def execute(self):
-# 			self.fm.execute_console('shell echo -n %d/%f | sed "s|/home/$USER|\$HOME|" | xclip -selection clipboard ; notify-send "Copied to clipboard"')
-# 			self.fm.execute_console('shell echo -n %d/%f | sed "s#/home/$USER#\$HOME#" | sed "s/ / $(printf "\\\\") /g" | xclip -selection clipboard ; notify-send "Copied to clipboard"')
+class Copy_Full_Path(Command):
+	def execute(self):
+            self.fm.execute_console(r'shell echo -n %d/%f | sed "s|/home/$USER|\$HOME|" | xclip -selection clipboard ; notify-send "Copied to clipboard"')
+			# self.fm.execute_console('shell echo -n %d/%f | sed "s#/home/$USER#\$HOME#" | sed "s/ / $(printf "\\\\") /g" | xclip -selection clipboard ; notify-send "Copied to clipboard"')
 
 class clear_filter(Command):
     def execute(self):
@@ -144,3 +144,16 @@ class Drag_single_file_from_MULTI_DIR(Command):
 class send_file(Command):
 	def execute(self):
 			self.fm.execute_console('shell read -p "Device name:" device_name && kdeconnect-cli --name "$device_name" --share %s && notify-send "sending..." &')
+
+class filter_images(Command):
+    """
+    :filter_images
+
+    Filter and display only image files in the current directory.
+    """
+    def execute(self):
+                self.fm.execute_console(r'filter ^.*\.(png|jpe?g|gif|bmp|tiff|webp)$')
+
+class copy_image(Command):
+	def execute(self):
+			self.fm.execute_console('shell xclip -selection clipboard -target image/png %f')

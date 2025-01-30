@@ -89,10 +89,10 @@ fi             # FILE
 *.toml          
 *.bat           
 *.mk            
-*.jpg           
+*.jpg           
 *.jpeg          
 *.bmp           
-*.png           
+*.png           
 *.webp          
 *.gif           
 *.ico           
@@ -270,7 +270,7 @@ Vagrantfile             
 *.txz   
 *.tzo   
 *.t7z   
-*.zip   
+*.zip   
 *.z     
 *.dz    
 *.gz    
@@ -305,8 +305,8 @@ Vagrantfile             
 *.esd   
 
 # image formats (extensions from dircolors defaults)
-*.jpg   
-*.jpeg  
+*.jpg   
+*.jpeg  
 *.mjpg  
 *.mjpeg 
 *.gif   
@@ -319,8 +319,8 @@ Vagrantfile             
 *.xpm   
 *.tif   
 *.tiff  
-*.png   
-*.svg   
+*.png   
+*.svg   
 *.svgz  
 *.mng   
 *.pcx   
@@ -363,7 +363,7 @@ Vagrantfile             
 *.mid   
 *.midi  
 *.mka   
-*.mp3   
+*.mp3   
 *.mpc   
 *.ogg   
 *.ra    
@@ -374,4 +374,4 @@ Vagrantfile             
 *.xspf  
 
 # other formats
-*.pdf   
+*.pdf   

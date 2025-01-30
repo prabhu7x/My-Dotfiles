@@ -283,8 +283,8 @@ assign [class="Code"] $ws2 &
 assign [class="qpwgraph"] $ws8
 #for_window [class="qpwgraph"] move to workspace $ws8
 for_window [title="btop ~"] move to workspace $ws8, focus
-
 for_window [class="Spotify"] border none, move to workspace $ws7
+# for_window [class="Spotify"] move container to workspace $ws7
 # for_window [class="firefox"] move to workspace $ws1
 # for_window [class="kdeconnect"] move to workspace $ws5
 
@@ -421,7 +421,7 @@ exec_always --no-startup-id fix_xcursor &
 ### Autostart Applications
 exec --no-startup-id "sh -c 'sleep 1; exec firefox'"
 exec --no-startup-id "sh -c 'sleep 2; exec code'"
-exec --no-startup-id "sh -c 'sleep 20; exec spotify'"
+# exec --no-startup-id "sh -c 'sleep 20; exec spotify'"
 #exec --no-startup-id "sh -c 'sleep 5; exec ~/scripts/Arch_updates'"
 #exec --no-startup-id "sh -c 'sleep 3; exec emacs'"
 

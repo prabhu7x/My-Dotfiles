@@ -1,6 +1,6 @@
 set ratios 1:2:3
 set cleaner ~/.config/lf/cleaner
-set previewer ~/.config/lf/previewer
+set previewer ~/.config/lf/preview
 # interpreter for shell commands
 set shell sh
 set icons true
@@ -71,17 +71,20 @@ map a :push %mkdir<space>
 cmd trash %set -f; mv $fx ~/.trash
 
 # define a custom 'delete' command
-# cmd delete ${{
-#     set -f
-#     printf "$fx\n"
-#     printf "delete?[y/n]"
-#     read ans
-#     [ "$ans" = "y" ] && rm -rf $fx
-# }}
+cmd delete ${{
+    set -f
+    printf "$fx\n"
+    printf "delete?[y/n]"
+    read ans
+    [ "$ans" = "y" ] && rm -rf $fx
+}}
+
 
 # use '<delete>' key for either 'trash' or 'delete' command
 # map <delete> trash
 # map <delete> delete
+map D delete
+map d trash
 
 # extract the current file with the right command
 # (xkcd link: https://xkcd.com/1168/)
@@ -124,7 +127,7 @@ map . set hidden!
 #     # `command` is needed in case `lfcd` is aliased to `lf`
 #     cd "$(command lf -print-last-dir "$@")"
 # }
-# alias lf='lfcd'
+#  alias lf='lfcd'
 
 # internal field separator: tell bash to split on newline, and not on space/tab as well
 # now we can do e.g. !7zz a archive.7z $fx
@@ -151,5 +154,25 @@ cmd fzf_jump ${{
         lf -remote "send $id $cmd \"$res\""
     fi
 }}
-map <c-o> :fzf_jump
+map <c-f> :fzf_jump
 
+
+set findlen 2
+
+map <a-f> filter
+# enable/disable real time filter (bool)
+set incfilter true
+# clear filter
+map zi setfilter
+map x cut
+
+
+# custom commands
+cmd copy_path ${{echo -n "$fx" | xclip -selection clipboard}}
+map <a-y> copy_path
+
+cmd Drop_all ${{dragon -a -x $fx & }} #hello
+map <a-d>x Drop_all
+# cmd Drop_all_global ${{shell dragon -a -x %c &}}
+cmd Drop_all_global ${{echo $fx }}
+map <a-d>X Drop_all_global
