@@ -141,10 +141,6 @@ class Drag_single_file_from_MULTI_DIR(Command):
 	def execute(self):
 			self.fm.execute_console('shell dragon -k %c &')
 
-class send_file(Command):
-	def execute(self):
-			self.fm.execute_console('shell read -p "Device name:" device_name && kdeconnect-cli --name "$device_name" --share %s && notify-send "sending..." &')
-
 class filter_images(Command):
     """
     :filter_images
@@ -157,3 +153,16 @@ class filter_images(Command):
 class copy_image(Command):
 	def execute(self):
 			self.fm.execute_console('shell xclip -selection clipboard -target image/png %f')
+
+################ kde-connect ##################
+class send_files_by_device(Command):
+	def execute(self):
+			self.fm.execute_console('shell $HOME/scripts/kde-share-device.sh %p')
+
+class send_files_global(Command):
+	def execute(self):
+			self.fm.execute_console('shell shell kdeconnect-cli --name path7 --share %c && notify-send "sending..." ')
+
+class send_files_current_dir(Command):
+	def execute(self):
+			self.fm.execute_console('shell shell kdeconnect-cli --name path7 --share %p && notify-send "sending..." ')
