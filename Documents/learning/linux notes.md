@@ -13,6 +13,7 @@
 - [packman](#pacman)
 - [bluetooth](#bluetooth)
 - [dragon](#dragon)
+- [without sudo](#without-sudo)
 
 * to find window class or name
   - xprop and click on window desired window
@@ -202,3 +203,8 @@ xrdb ~/.Xresources
 - make it excutable globally
 - - install this in `/usr/bin` path 
 - - or simply copy dragon file in `/usr/bin`
+
+# without-sudo
+`sudo setcap cap_net_raw,cap_net_admin+ep $(which app)`
+- to remove
+`sudo setcap -r $(which app)`

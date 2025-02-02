@@ -1,3 +1,5 @@
+#prompt#####
+#name: sashimi
 function fish_prompt
   set -l last_status $status
   set -l cyan (set_color -o cyan)
@@ -19,26 +21,20 @@ function fish_prompt
   end
   set -l cwd $cyan(basename (prompt_pwd))
 
-  # Git Info (Only Show If Not Inside My-Dotfiles Repo)
-  set -l git_info ""
   if [ (_git_branch_name) ]
-      set repo_root (command git rev-parse --show-toplevel 2>/dev/null)
 
-      # Disable Git status inside My-Dotfiles repository
-      if not string match -q "$HOME/My-Dotfiles" $repo_root
-          if test (_git_branch_name) = 'master'
-              set -l git_branch (_git_branch_name)
-              set git_info "$normal git:($red$git_branch$normal)"
-          else
-              set -l git_branch (_git_branch_name)
-              set git_info "$normal git:($blue$git_branch$normal)"
-          end
+    if test (_git_branch_name) = 'master'
+      set -l git_branch (_git_branch_name)
+      set git_info "$normal git:($red$git_branch$normal)"
+    else
+      set -l git_branch (_git_branch_name)
+      set git_info "$normal git:($blue$git_branch$normal)"
+    end
 
-          if [ (_is_git_dirty) ]
-              set -l dirty "$yellow ✗"
-              set git_info "$git_info$dirty"
-          end
-      end
+    if [ (_is_git_dirty) ]
+      set -l dirty "$yellow ✗"
+      set git_info "$git_info$dirty"
+    end
   end
 
   # Notify if a command took more than 2 minutes

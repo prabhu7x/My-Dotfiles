@@ -1,5 +1,27 @@
 
 
+## BASICS
+- to create new branch and switch
+- - new version
+`git switch -c branch-name`
+- - older version
+`git checkout -b branch-name`
+- `git branch branch-name` => just create branch not switch
+
+- to switch branch 
+`git checkout branch-name`
+- merge branch
+`git merge branch-name` (this will merge with current branch. do same with other branch)
+
+- merge branches in cleaner way with **rebase**
+`git rebase branch-name`
+
+- detach : checkout commit instead of branch
+`git checkout commit-name`
+- to detach one step up
+- `git HEAD^` (move one step from current branch)
+- `git HEAD~n` (move up n number from current branch)
+
 - to ignore for git repo create a " .gitignore " and type item
 - - eg: node_modules
 
