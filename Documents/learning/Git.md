@@ -22,9 +22,18 @@
 - `git HEAD^` (move one step from current branch)
 - `git HEAD~n` (move up n number from current branch)
 
+- to reassign a branch to a commit
+`git branch -f branch-name commit-` => eg: git branch -f main HEAD^
+
+- to undo commit in locale machine. git reset reverses changes by moving a branch reference backwards in time to an older commit
+- - `git reset HEAD^`
+- for remote repo `git revert HEAD`
+- to copy specific branch commit's `git cherry-pick commit-name`
+- do the same as cherry-pick but in interactive way `git rebase -i commit-1 commit-2 ..`
+
+
 - to ignore for git repo create a " .gitignore " and type item
 - - eg: node_modules
-
 
 # deploying vite project
 - add **base** in vite.config.js
