@@ -67,3 +67,10 @@ Here's how to include only Documents/learnings/ while ignoring everything else i
 ` Documents/* `     
 #### Include only the learnings folder inside Documents
 ` !Documents/learnings/ `
+
+### git rejected 
+- due to diffent committes in local and remote 
+- made a changes via web interface etc.
+- merge them with rebase liner `git pull --rebase origin main`
+- make sure everything committed . 
+- If your changes are work-in-progress and you don't want to commit them yet, stash them before pulling.
