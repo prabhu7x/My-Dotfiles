@@ -1,5 +1,5 @@
-from ranger.api.commands import Command
 
+from ranger.api.commands import Command
 class paste_as_root(Command):
 	def execute(self):
 		if self.fm.do_cut:
@@ -157,12 +157,41 @@ class copy_image(Command):
 ################ kde-connect ##################
 class send_files_by_device(Command):
 	def execute(self):
-			self.fm.execute_console('shell $HOME/scripts/kde-share-device.sh %p')
+			self.fm.execute_console("shell $HOME/scripts/kde-share-device.sh '%s'")
 
 class send_files_global(Command):
 	def execute(self):
-			self.fm.execute_console('shell shell kdeconnect-cli --name path7 --share %c && notify-send "sending..." ')
+			self.fm.execute_console('shell kdeconnect-cli --name NOTE --share %c && notify-send "sending..." ')
 
 class send_files_current_dir(Command):
 	def execute(self):
-			self.fm.execute_console('shell shell kdeconnect-cli --name path7 --share %p && notify-send "sending..." ')
+			self.fm.execute_console('shell kdeconnect-cli --name NOTE --share %s && notify-send "sending..." ')
+
+
+
+import os
+import subprocess
+
+class FzF(Command):
+    """
+    :fzf_cd_parent
+
+    Launch fzf to select a file (with a preview using bat) and change the
+    current directory to the parent directory of the selected file.
+    """
+    def execute(self):
+        # Build the fzf command with a prompt and preview using bat
+        command = (
+            "fzf --prompt='Select a file: ' "
+            "--preview 'bat --style=numbers --color=always --line-range :500 {}'"
+        )
+        # Execute the command
+        fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
+        stdout, _ = fzf.communicate()
+
+        # If fzf returns successfully, process the output
+        if fzf.returncode == 0:
+            selected_file = stdout.decode("utf-8").strip()
+            if selected_file:
+                parent_dir = os.path.dirname(selected_file)
+                self.fm.cd(parent_dir)
