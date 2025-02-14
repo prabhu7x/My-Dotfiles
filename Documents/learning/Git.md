@@ -1,4 +1,7 @@
 
+## git setup
+- `git remote set-url origin git@github.com:prabhu7x/My-Dotfiles.git
+`
 
 ## BASICS
 - to create new branch and switch
