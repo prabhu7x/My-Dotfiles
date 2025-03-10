@@ -65,16 +65,7 @@ bindsym $mod+Shift+slash exec $HOME/.config/rofi/files/launchers/type-4/launcher
 bindsym $mod+Shift+o exec $HOME/.config/rofi/emoji/launcher.sh
 
 #bindsym $mod+d exec --no-startup-id dmenu_recency
-#bindsym $mod+slash exec dmenu_run -p  -fn ubuntu -nb '#000000' -sf '#000000' -sb '#00faff' -nf '#00faff'
-#bindsym $mod+d exec dmenu_run -fn ubuntu -p  -h 24 -hp $hpl -nb '#1e1e1e' -hf '#ff0900' -hb '#1e1e1e' -sf '#00a1ff' -sb '#1e1e1e' -nf '#ff0900'
-#for old polybar border
-#bindsym $mod+d exec $(dmenu_run -X 1 -Y 1 -W 1437 -p  -fn ubuntu -bw 2 -nb '#1e1e1e' -nf '#ff0900' -sf '#00a1ff' -sb '#1e1e1e' -hp $(cat ~/scripts/hpl) -hf '#ff0900' -hb '#1e1e1e') 
-#for old polybar border
 
-#bindsym $mod+slash exec $(dmenu_run -X -8 -Y -8 -W 1456 -p  -fn 'ubuntu' -bw 2 -nb '#1e1e1e' -nf '#ff0900' -sf '#00a1ff' -sb '#1e1e1e' -hp $(cat ~/scripts/hpl) -hf '#ff0900' -hb '#1e1e1e') 
-
-#bindsym $mod+d exec $(dmenu_run -X 4 -Y 4 -W 1431 -p  -fn ubuntu -bw 2 -nb '#1e1e1e' -nf '#ff0900' -sf '#00a1ff' -sb '#1e1e1e' -hp $(cat ~/scripts/hpl) -hf '#ff0900' -hb '#1e1e1e')
-#bindsym $mod+d dmenu_run -fn ubuntu -p  -h 24 -nb '#1e1e1e' -sf '#00a1ff' -sb '#1e1e1e' -nf '#ff0900' 
 
 # launch categorized menu
 #bindsym $mod+z exec --no-startup-id morc_menu
@@ -324,6 +315,7 @@ bindsym $mod+Shift+plus exec "$HOME/.local/bin/pmx"
 # Start Applications
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+bindsym $mod+Shift+p exec $HOME/.config/polybar/launch.sh
 exec --no-startup-id "sh -c 'sleep 5s; qpwgraph -a $HOME/.config/autochannel.qpwgraph -m &'"
 #exec_always --no-startup-id $HOME/.config/polybar/tem_launch.sh
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
@@ -354,7 +346,8 @@ for_window [title="alsamixer"] floating enable border pixel 1
 for_window [title="rgr"] move window to scratchpad, scratchpad show
 exec --no-startup-id for_window [title="rg-ranger"] move scratchpad
 for_window [title="rg-ranger"] floating enable border pixel 2, move position 202 px 237 px, resize set 1000 px 450 px 
-for_window [title="^rectangleX"] floating enable border pixel 2, move position 6 px 31 px, resize set 1428 px 428 px
+#for_window [title="^rectangleX"] floating enable border pixel 2, move position 6 px 31 px, resize set 1428 px 428 px
+for_window [class="scratchpad"] floating enable border pixel 2, move position 6 px 31 px, resize set 1428 px 428 px
 for_window [title="^ala1x"] floating enable border pixel 2, move position 968 px 644 px, resize set 402 px 208 px
 for_window [class="pavucontrol"] floating enable border pixel 1, move position 693 px 34 px, resize set 740 px 342 px
 # alacritty -t pulsewindow -e pulsemixer &
@@ -389,6 +382,9 @@ for_window [class="Mousepad"] floating enable border pixel 2, move position 1097
 #exec --no-startup-id exec rgr
 exec --no-startup-id exec $HOME/scripts/i3/startup.sh
 
+for_window [title="^alacritty-scratchpad"] move scratchpad
+bindsym $mod+Shift+Return [title="^alacritty-scratchpad"] scratchpad show
+
 ######################## Autostart deamons and Applications #############################
 
 exec_always --no-startup-id brightness_workspaces_i3.sh
@@ -405,13 +401,6 @@ exec --no-startup-id xfce4-power-manager &
 exec --no-startup-id pamac-tray &
 exec --no-startup-id clipit &
 exec_always --no-startup-id picom -b &
-#exec_always --no-startup-id picom --experimental-backends -b
-#exec_always --no-startup-id picom -b
-#exec_always picom -b --animations --animation-window-mass 0.5 --animation-for-open-window zoom animation-stiffness 100 --corner-radius 15 --config $HOME/.config/picom.conf &
-# exec --no-startup-id blueman-applet
-# exec_always --no-startup-id sbxkb
-#exec --no-startup-id start_conky_maia
-# exec --no-startup-id start_conky_green
 exec_always --no-startup-id clipmenud &
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util &

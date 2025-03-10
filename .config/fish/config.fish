@@ -8,6 +8,7 @@ end
 alias install='sudo pacman -S'
 alias remove='sudo pacman -R'
 alias update='sudo pacman -Syu'
+alias vim='vim'
 #alias update='~/scripts/update.sh'
 alias v='vim'
 alias ls='lsd'

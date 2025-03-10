@@ -14,6 +14,7 @@
 - [bluetooth](#bluetooth)
 - [dragon](#dragon)
 - [without sudo](#without-sudo)
+- [flash iso](#dd)
 
 * to find window class or name
   - xprop and click on window desired window
@@ -208,3 +209,6 @@ xrdb ~/.Xresources
 `sudo setcap cap_net_raw,cap_net_admin+ep $(which app)`
 - to remove
 `sudo setcap -r $(which app)`
+
+# dd
+> sudo dd if=/path/to/iso of=/dev/sdX bs=4M status=progress

@@ -103,3 +103,32 @@ install gvim and copied text automatically sent to  systemclipboard
 ## shell commands
 
 - click `!!` in normal mode and then it will let you type shell commands in vim command line.
+
+- yank text with register
+    - "{register}y
+- to paste
+    - "{register}p
+- To view the contents of all registers, use the :reg command:
+
+- Accessing Yanked Text
+
+> By default, yanked text is stored in the unnamed register (""). However, Vim also stores the most recent yanked text in the yank register ("0), which is useful if you overwrite the unnamed register with a delete or change operation.
+
+    - "0p: Paste the most recently yanked text (from the 0 register).
+
+    - ""p: Paste from the unnamed register (which may contain the last yanked or deleted text).
+
+Special Register
+
+Vim has several special registers:
+
+    "": Unnamed register (default for yank, delete, and change operations).
+
+    "0: Yank register (stores the most recently yanked text).
+
+    "1-"9: Numbered registers (store deleted or changed text, with "1 being the most recent).
+
+    "+: System clipboard register (for copying to/pasting from the system clipboard).
+
+    "*: Primary selection register (for X11 clipboard).
+

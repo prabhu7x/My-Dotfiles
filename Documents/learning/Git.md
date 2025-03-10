@@ -5,13 +5,13 @@
 
 ## BASICS
 - to create new branch and switch
-- - new version
-`git switch -c branch-name`
-- - older version
-`git checkout -b branch-name`
-- `git branch branch-name` => just create branch not switch
+- new version
+   -  `git switch -c branch-name`
+- older version
+    - `git checkout -b branch-name`
+    - `git branch branch-name` => just create branch not switch
 
-- to switch branch 
+    - to switch branch 
 `git checkout branch-name`
 - merge branch
 `git merge branch-name` (this will merge with current branch. do same with other branch)
@@ -72,8 +72,10 @@ Here's how to include only Documents/learnings/ while ignoring everything else i
 ` !Documents/learnings/ `
 
 ### git rejected 
-- due to diffent committes in local and remote 
-- made a changes via web interface etc.
-- merge them with rebase liner `git pull --rebase origin main`
-- make sure everything committed . 
-- If your changes are work-in-progress and you don't want to commit them yet, stash them before pulling.
+- **Reasons**
+    - due to different committes in local and remote.
+    - made a changes via web interface etc.
+- **try**
+    - merge them with rebase liner `git pull --rebase origin main`
+    - make sure everything committed . 
+    - If your changes are work-in-progress and you don't want to commit them yet, stash them before pulling.

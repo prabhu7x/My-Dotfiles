@@ -9,6 +9,7 @@
 !.config/mpv
 !.config/polybar
 !.config/ranger
+.config/ranger/plugins/__pycache__
 !.config/rofi
 !.config/yazi
 !.config/kdeglobals

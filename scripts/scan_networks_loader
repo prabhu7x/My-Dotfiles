@@ -1,8 +1,8 @@
 #/bin/bash
 
 a=$(notify-send  --replace-id=33 "scanning." && sleep 0.9)
-b=$(notify-send  --replace-id=33 "scanning.." && sleep 0.9)
-c=$(notify-send  --replace-id=33 "scanning..." && sleep 0.9)
+b=$(notify-send  --replace-id=33 " scanning.." && sleep 0.9)
+c=$(notify-send  --replace-id=33 "  scanning..." && sleep 0.9)
 k=$(notify-send -t 2000 --replace-id=33 -h string:fgcolor:#10FF00 -h string:frcolor:#DA872C "Scanning completed")
 #d="notify-send -t 1000 --replace-id=33 "done""
 #z="1"
