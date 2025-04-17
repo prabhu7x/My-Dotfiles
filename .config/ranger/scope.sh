@@ -83,7 +83,7 @@ handle_extension() {
             lynx -dump -- "${FILE_PATH}" && exit 5
             elinks -dump "${FILE_PATH}" && exit 5
             ;;
-        js|jsx|json)
+        js|jsx|tsx|ts|json)
             highlight --syntax=javascript -O ansi "${FILE_PATH}" && exit 0
             pygmentize -f terminal -O style="${PYGMENTIZE_STYLE}" -l javascript "${FILE_PATH}" && exit 0
             ;;

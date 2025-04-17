@@ -62,6 +62,7 @@ bindsym $mod+slash exec dmenu_run -p  -fn 'Shure Tech Mono Nerd Font' -nb '#0
 bindsym $mod+x exec /$HOME/.config/rofi/files/powermenu/type-1/powermenu.sh
 
 bindsym $mod+Shift+slash exec $HOME/.config/rofi/files/launchers/type-4/launcher.sh
+# install rofi-emoji from AUR
 bindsym $mod+Shift+o exec $HOME/.config/rofi/emoji/launcher.sh
 
 #bindsym $mod+d exec --no-startup-id dmenu_recency

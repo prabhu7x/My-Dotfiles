@@ -1995,3 +1995,8 @@ class paste_ext(Command):
 class Drop_all_and_exit_CURRENT_DIR(Command):
     def execute(self):
             self.fm.execute_console("shell dragon -a -x %s &")
+
+
+class ocr_image_search(command):
+    def execute(self):
+            self.fm.execute_console("shell bash $home/scripts/ocr-search-img.sh %d")

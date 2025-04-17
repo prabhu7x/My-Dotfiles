@@ -1,4 +1,4 @@
-1. what is React 
+1. what is React
     - React is open source javascript library used to build dynamic web applications.
     - React was created by Jordan Walke, a software engineer working for Facebook. React was first deployed on Facebook's News Feed in 2011 and on Instagram in 2012.
 

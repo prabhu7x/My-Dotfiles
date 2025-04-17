@@ -52,6 +52,32 @@
   > use {replace: true}  
   > eg: navigate('some_pah',{replace: true})
 
+### Nested Routes in the same page
+`import { Outlet,Link } from "react-router-dom";
+
+const Layout = ()=> {
+    return (
+      <>
+        <button>
+          <Link to="/">Home</Link> 
+        </button>
+        <button>
+          <Link to="job">Job</Link>
+        </button>
+        <button>
+          <Link to="career">career</Link>
+        </button>
+        <main>
+        <Outlet />
+        </main>
+      </>
+    );`
+}
+
+export default Layout;
+
+- in App.jsx <Route path="/" element={Layout} />
+
 # add class name to clicked item in map function and using useState
 
 - `const [activeIndex, setActiveIndex] = useState(null)`

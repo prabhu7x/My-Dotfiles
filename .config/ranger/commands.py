@@ -127,8 +127,6 @@ class fzf_select(Command):
                 self.fm.select_file(fzf_file)
 
 
-from plugins.ranger_udisk_menu.mounter import mount
-
 class Drop_all_and_exit_CURRENT_DIR(Command):
 	def execute(self):
 			self.fm.execute_console("shell dragon -a -x %s &")
