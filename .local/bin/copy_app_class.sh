@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Relaunch the script in Alacritty if not already in Alacritty
+if [ -z "$ALACRITTY_WINDOW_ID" ]; then
+    alacritty --class mini-window -e "$0" "$@"
+    exit
+fi
+
+# # ---- Your actual script logic below ----
+echo "Running in Alacritty!"
+read -rp "Press enter to continue..."
+
 # Check if xprop is installed
 if ! command -v xprop &> /dev/null; then
     echo "Error: xprop is not installed. Install it using your package manager."

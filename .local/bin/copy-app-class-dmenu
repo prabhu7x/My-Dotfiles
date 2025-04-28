@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Check for required tools
+for cmd in xdotool xprop xclip; do
+    if ! command -v "$cmd" &>/dev/null; then
+        notify-send "❌ Missing $cmd" "Install it to continue."
+        exit 1
+    fi
+done
+
+# Ask user to click a window
+notify-send --replace-id=113 "🖱️ Click a window" "Click the window to get its WM_CLASS"
+
+# Get the window ID by clicking
+WIN_ID=$(xprop | awk '/^WM_CLASS/ {print $0; exit}' | tee /tmp/window_class_info)
+
+# Extract class name
+CLASS=$(awk -F '"' '{print $(NF-1)}' /tmp/window_class_info)
+
+if [ -n "$CLASS" ]; then
+    echo -n "$CLASS" | xclip -selection clipboard
+    notify-send --replace-id=113 "✅ App Class Copied" "$CLASS"
+else
+    notify-send "❌ Failed" "Could not detect class name."
+fi
+
