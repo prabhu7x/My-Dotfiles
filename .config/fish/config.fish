@@ -1,3 +1,7 @@
+if test -z "$DISPLAY" -a (tty) = "/dev/tty1"
+  exec startx
+end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
@@ -145,4 +149,8 @@ end
     
     bind \cH backward-kill-word
     bind \el forward-bigword
+
+export COLORTERM=truecolor
+fish_add_path ~/.local/bin
+	if test -f /home/eren/.autojump/share/autojump/autojump.fish; . /home/eren/.autojump/share/autojump/autojump.fish; end
 

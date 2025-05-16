@@ -8,7 +8,7 @@
 
 configuration {
 	/*---------- General setting ----------*/
-	modi: "drun,run,filebrowser,window";
+	modi: "drun,run,filebrowser,window,scratchpad:$HOME/scripts/rofi_i3_scratchpad" -show scratchpad;
 	case-sensitive: false;
 	cycle: true;
 	filter: "";

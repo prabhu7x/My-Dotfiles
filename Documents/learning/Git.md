@@ -1,4 +1,12 @@
 
+- [git setup](#git-setup)
+- [basics](#basics)
+- [Deploy vite project](#deploying-vite-project)
+- [Git ignore](#ignore-everything)
+- [Remove files or folders from remote repo (yadm)](#remove-files-or-folders-from-remote--repo)
+- [when git rejected](#git-rejected)
+
+
 ## git setup
 - `git remote set-url origin git@github.com:prabhu7x/My-Dotfiles.git
 `
@@ -70,6 +78,21 @@ Here's how to include only Documents/learnings/ while ignoring everything else i
 ` Documents/* `     
 #### Include only the learnings folder inside Documents
 ` !Documents/learnings/ `
+
+### Remove files or folders from remote  repo
+
+- Step 1: Remove folder from the repo index (but not from disk)
+yadm rm -r --cached somefolder/
+
+- Step 2: Add the folder to .gitignore if you haven't already
+echo "somefolder/" >> ~/.gitignore
+
+- Step 3: Commit the change
+yadm commit -m "Remove somefolder from tracking"
+
+- Step 4: Push to remote
+yadm push
+
 
 ### git rejected 
 - **Reasons**

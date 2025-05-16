@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Set DISPLAY (if not already)
+export DISPLAY=${DISPLAY:-:0}
+
+# Set MONITOR name (e.g., HDMI-1, eDP-1) using xrandr
+export MONITOR=$(xrandr | awk '/ connected/ {print $1; exit}')
+
+# For GTK2
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+
+# For GTK3/GTK4
+export GTK_THEME=Adwaita-dark
+export QT_QPA_PLATFORMTHEME=qt5ct
+
+
+# Launch Polybar (you can replace the path with your launch script)
+#~/.config/polybar/launch.sh &
+
+# Optional: Start compositor
+# picom &
+
+# Optional: Set wallpaper
+# feh --bg-scale ~/Pictures/wallpaper.jpg &
+
+# Optional: Start network applet or notification daemon
+# nm-applet &
+# dunst &

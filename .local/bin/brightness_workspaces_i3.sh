@@ -1,7 +1,22 @@
 #!/bin/bash
 
-notify-send 'adaptive brightness activeted' &
+# Lock file location
+LOCKFILE="/tmp/brightness_workspace.lock"
 
+if [ -e "$LOCKFILE" ] && kill -0 "$(cat "$LOCKFILE")" 2>/dev/null; then
+    echo "Script already running."
+    exit 1
+fi
+
+echo $$ > "$LOCKFILE"
+
+# Clean up lock on exit
+trap "rm -f $LOCKFILE" EXIT
+
+
+notify-send 'adaptive brightness activated' &
+
+monitor=$(xrandr | awk '/ connected/ {print $1; exit}')
 # Define brightness values for each workspace
 brightness_workspace1=0.7
 # brightness_workspace2=0.9
@@ -11,7 +26,7 @@ default_brightness=1.0
 
 # Function to set brightness
 set_brightness() {
-    xrandr --output HDMI1 --brightness $1
+    xrandr --output $monitor --brightness $1
 }
 
 # Initialize the brightness to the default value

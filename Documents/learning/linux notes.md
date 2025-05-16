@@ -206,9 +206,10 @@ xrdb ~/.Xresources
 - - or simply copy dragon file in `/usr/bin`
 
 # without-sudo
-`sudo setcap cap_net_raw,cap_net_admin+ep $(which app)`
+`sudo setcap cap_net_raw,cap_net_admin+ep $(which <program name>)`
+program path or simple use which <program name>
 - to remove
-`sudo setcap -r $(which app)`
+`sudo setcap -r $(which <program name>)`
 
 # dd
 > sudo dd if=/path/to/iso of=/dev/sdX bs=4M status=progress

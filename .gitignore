@@ -24,5 +24,6 @@ Documents/*
 !.local/
 .local/*
 !.local/bin/
+!.xprofile
 
 git rm -r --cached .config/dmenu-flexipatch

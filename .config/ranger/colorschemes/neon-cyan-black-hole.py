@@ -34,7 +34,7 @@ class Neon_black_hole(ColorScheme):
                 if context.image:
                     fg = 215
                 else:
-                    fg = 204
+                    fg = 91
             if context.container:
                 fg = red
             if context.directory:
@@ -82,10 +82,10 @@ class Neon_black_hole(ColorScheme):
                     fg = 0
                 if context.marked:
                     attr |= bold
-                    fg = 100
+                    fg = 204
             # colors when  highlighted which are already marked
             if context.marked and context.selected:
-                fg = 226
+                fg = 197
                 bg = 0
                 # fg += BRIGHT
                 attr = bold             # Bold text
@@ -122,7 +122,7 @@ class Neon_black_hole(ColorScheme):
                     fg = cyan
                 elif context.bad:
                     fg = magenta
-            if context.marked:
+            if context.marked: # for marked colorization look down
                 attr |= bold | reverse
                 fg = yellow
                 fg += BRIGHT

@@ -1,0 +1,57 @@
+#!/usr/bin/sh
+# rofi i3 and sway scratchpad menu mode v1.3
+
+if [ "$(which jq)" ]; then
+	case "$WAYLAND_DISPLAY" in
+		wayland*)
+			scratched="$(swaymsg -t get_tree | jq -r '.. | objects | select(.name == "__i3_scratch") | .. | objects | select(has("app_id")) | "\(.id) \(.app_id // .window_properties.class) - \(.name)"')"
+			if [ "$@" ]; then
+				case "$@" in
+					"All Windows")
+						swaymsg '[class=.] scratchpad show' && sleep 0.1s && pkill -u $USER rofi
+						;;
+					"No Windows in Scratchpad")
+						exit 0
+						;;
+					*)
+			    	winid=$(echo "$@" | cut -d ' ' -f1)
+			    	swaymsg "[con_id=$winid] focus" && pkill -u $USER rofi
+			    	;;
+			    esac
+			else
+				if [ -z "$scratched" ]; then
+			    	echo "No Windows in Scratchpad"
+			    else
+			        echo "$scratched"
+			        echo "All Windows"
+			    fi
+			fi
+			;;
+		*)
+			scratched="$(i3-msg -t get_tree | jq '.nodes[] | .nodes[] | .nodes[] | select(.name=="__i3_scratch") | .floating_nodes[] | .nodes[] | .window,.name' | paste - -)"
+			if [ "$@" ]; then
+				case "$@" in
+					"All Windows")
+					i3-msg '[class=.] scratchpad show' && sleep 0.1s && pkill -u $USER rofi
+					;;
+					"No Windows in Scratchpad")
+					exit 0
+					;;
+					*)
+			    	winid=$(echo "$@" | cut -f1)
+			    	i3-msg "[id=$winid] scratchpad show" && pkill -u $USER rofi
+			    	;;
+		    esac
+		else
+			if [ -z "$scratched" ]; then
+		    	echo "No Windows in Scratchpad"
+		    else
+		        echo "$scratched"
+		    	echo "All Windows"
+		    fi
+		fi
+		;;
+	esac
+else
+	echo "jq not found"
+fi

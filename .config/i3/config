@@ -1,4 +1,3 @@
-# i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
@@ -48,7 +47,8 @@ font xft:jetbrains bold 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+#bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec alacritty -e fish &
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -276,7 +276,6 @@ assign [class="qpwgraph"] $ws8
 #for_window [class="qpwgraph"] move to workspace $ws8
 for_window [title="btop ~"] move to workspace $ws8, focus
 for_window [class="Spotify"] border none, move to workspace $ws7
-# for_window [class="Spotify"] move container to workspace $ws7
 # for_window [class="firefox"] move to workspace $ws1
 # for_window [class="kdeconnect"] move to workspace $ws5
 
@@ -317,7 +316,7 @@ bindsym $mod+Shift+plus exec "$HOME/.local/bin/pmx"
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 bindsym $mod+Shift+p exec $HOME/.config/polybar/launch.sh
-exec --no-startup-id "sh -c 'sleep 5s; qpwgraph -a $HOME/.config/autochannel.qpwgraph -m &'"
+# exec --no-startup-id "sh -c 'sleep 5s; qpwgraph -a $HOME/.config/autochannel.qpwgraph -m &'"
 #exec_always --no-startup-id $HOME/.config/polybar/tem_launch.sh
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F2 exec brave 
@@ -341,15 +340,11 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 # position values:- move position <Absolute upper-left X> px <Absolute upper-left Y> px, resize set <Width> px <Height> px 
 #xwininfo | grep 'Absolute upper-left X:\|Absolute upper-left Y:\|Width\|Height'
 #use xprop to find window class and name
+
 for_window [title="alsamixer"] floating enable border pixel 1
-#for_window [title="rectangleX"] floating enable border pixel 2, move position 202 px 237 px, resize set 1000 px 450 px 
-#for_window [title="rg-ranger"] move scratchpad
-for_window [title="rgr"] move window to scratchpad, scratchpad show
-exec --no-startup-id for_window [title="rg-ranger"] move scratchpad
-for_window [title="rg-ranger"] floating enable border pixel 2, move position 202 px 237 px, resize set 1000 px 450 px 
-#for_window [title="^rectangleX"] floating enable border pixel 2, move position 6 px 31 px, resize set 1428 px 428 px
+for_window [title="ranger-fm"] move scratchpad, scratchpad show
 for_window [class="scratchpad"] floating enable border pixel 2, move position 6 px 31 px, resize set 1428 px 428 px
-for_window [title="^ala1x"] floating enable border pixel 2, move position 968 px 644 px, resize set 402 px 208 px
+for_window [class="mini-window"] floating enable border pixel 2, move position 968 px 644 px, resize set 402 px 208 px
 for_window [class="pavucontrol"] floating enable border pixel 1, move position 693 px 34 px, resize set 740 px 342 px
 # alacritty -t pulsewindow -e pulsemixer &
 for_window [class="calamares"] floating enable border normal
@@ -381,10 +376,12 @@ for_window [class="Mousepad"] floating enable border pixel 2, move position 1097
 
 # scratchpads
 #exec --no-startup-id exec rgr
-exec --no-startup-id exec $HOME/scripts/i3/startup.sh
+exec --no-startup-id exec /home/eren/scripts/i3/startup.sh &
+# exec --no-startup-id exec $HOME/scripts/scratchpads.sh
 
 for_window [title="^alacritty-scratchpad"] move scratchpad
 bindsym $mod+Shift+Return [title="^alacritty-scratchpad"] scratchpad show
+bindsym $mod+Shift+z exec rofi -show scratchpad -modi "scratchpad:/home/prabhu/scripts/rofi_i3_scratchpad"
 
 ######################## Autostart deamons and Applications #############################
 
@@ -481,6 +478,7 @@ set_from_resource $term_color15    color15
 # hide/unhide i3status bar and polybar
 #bindsym $mod+m bar mode toggle
 bindsym $mod+p exec ~/.config/polybar/scripts/polybar_hide_show
+bindsym $mod+Shift+n exec $HOME/.local/bin/scan_networks.sh
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border

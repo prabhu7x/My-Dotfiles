@@ -11,6 +11,8 @@ class paste_as_root(Command):
 
 from plugins.ranger_udisk_menu.mounter import mount
 
+####### Dragon drag and drop #######
+
 class Drop_all_and_exit_CURRENT_DIR(Command):
 	def execute(self):
 			self.fm.execute_console("shell dragon -a -x %s &")
@@ -19,7 +21,7 @@ class Drop_all_and_exit_from_MULTI_DIR(Command):
 	def execute(self):
 			self.fm.execute_console('shell dragon -a -x %c &')
 
-class Drag_single_file_from_MULTI_DIR(Command):
+class Drop_single_file_from_MULTI_DIR(Command):
 	def execute(self):
 			self.fm.execute_console('shell dragon -k %c &')
 
@@ -27,25 +29,28 @@ class target(Command):
 	def execute(self):
 			self.fm.execute_console('shell dragon -t %c &')
 
-class Drag_single_file_from_group_CURRENT(Command):
+class Drop_single_file_from_CURRENT(Command):
 	def execute(self):
 			self.fm.execute_console('shell dragon -k %s &')
 
-class Drop_all_files_from_CURRENT_DIR_and_Stay(Command):
+class Drop_all_from_CURRENT_DIR_and_Stay(Command):
 	def execute(self):
 			self.fm.execute_console('shell dragon -a %s &')
 
-class Drop_all_files_from_MULTI_DIR_and_Stay(Command):
+class Drop_all_from_MULTI_DIR_and_Stay(Command):
 	def execute(self):
 			self.fm.execute_console('shell dragon -a %c &')
 
-class Drag_single_file_from_group_ICON_CURRENT_DIR(Command):
+class Drop_single_file_CURRENT_DIR__icon(Command):
 	def execute(self):
 			self.fm.execute_console('shell dragon -i %s &')
 
-class Drag_single_file_from_group_ICON_MULTI_DIR(Command):
+class Drop_single_MULTI_DIR__icon(Command):
 	def execute(self):
-			self.fm.execute_console('shell dragon -i %c &')
+			self.fm.execute_console('shell dragon -i %c')
+class Hell(Command):
+	def execute(self):
+			self.fm.execute_console('shell echo %c')
 
 class Copy_Full_Path(Command):
 	def execute(self):
@@ -126,18 +131,6 @@ class fzf_select(Command):
             else:
                 self.fm.select_file(fzf_file)
 
-
-class Drop_all_and_exit_CURRENT_DIR(Command):
-	def execute(self):
-			self.fm.execute_console("shell dragon -a -x %s &")
-
-class Drop_all_and_exit_from_MULTI_DIR(Command):
-	def execute(self):
-			self.fm.execute_console('shell dragon -a -x %c &')
-
-class Drag_single_file_from_MULTI_DIR(Command):
-	def execute(self):
-			self.fm.execute_console('shell dragon -k %c &')
 
 class filter_images(Command):
     """
