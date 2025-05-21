@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Get image path from argument
+IMG="$1"
+ID="--replace-id=120"
+
+# Exit if no image provided
+[ -z "$IMG" ] && notify-send $ID "❌ No image file provided." && exit 1
+
+# Notify start
+notify-send $ID "🖼️ Applying..." "Setting lockscreen wallpaper..."
+
+# Progress stages
+notify-send $ID "🖼️ Applying."     && sleep 0.9
+notify-send $ID " 🖼️ Applying.."    && sleep 0.9
+notify-send $ID "  🖼️ Applying..."   && sleep 0.9
+
+# Apply wallpaper silently with dim
+betterlockscreen -u "$IMG" >/dev/null 2>&1
+
+# Success message
+if [ $? -eq 0 ]; then
+    notify-send $ID "✅ Lockscreen Applied" "$(basename "$IMG")"
+else
+    notify-send $ID "❌ Failed to apply lockscreen"
+fi
+

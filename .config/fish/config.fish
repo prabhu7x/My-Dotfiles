@@ -140,6 +140,9 @@ set -U fish_color_command default
 
 set -x PATH  ./.local/bin/ $PATH 
 set EDITOR vim
+set -x PAGER less
+set -x MANPAGER less
+
 set d7 dmenu -X 2 -Y 2 -W 1435 -fn ubuntu -bw 2 -nb '#1e1e1e' -nf '#ff0900' -sf '#00a1ff' -sb '#1e1e1e'
 #if test -f /home/prabhu7k/.autojump/share/autojump/autojump.fish; . /home/prabhu7k/.autojump/share/autojump/autojump.fish; end
 if test -e /usr/share/autojump/autojump.fish

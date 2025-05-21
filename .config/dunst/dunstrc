@@ -188,9 +188,9 @@
     timeout = 7
 
 [urgency_normal]
-    background = "#0000001A"
+    background = "#00000026"
     foreground = "#00FFFF"
-    frame_color = "#8500FF4D"
+    frame_color = "#8500FF00"
     timeout = 10
     #icon = 
 

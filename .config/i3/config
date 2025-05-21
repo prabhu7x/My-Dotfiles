@@ -401,6 +401,7 @@ exec --no-startup-id clipit &
 exec_always --no-startup-id picom -b &
 exec_always --no-startup-id clipmenud &
 exec --no-startup-id xautolock -time 10 -locker blurlock
+exec --no-startup-id xautolock -time 2 -locker "betterlockscreen -l"
 exec_always --no-startup-id ff-theme-util &
 exec_always --no-startup-id fix_xcursor &
 #exec_always --no-startup-id emacs --daemon  &

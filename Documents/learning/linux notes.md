@@ -15,6 +15,7 @@
 - [dragon](#dragon)
 - [without sudo](#without-sudo)
 - [flash iso](#dd)
+- [swap partition](#swap-partition-setup-in-arch-linux-with-hibernation)
 
 * to find window class or name
   - xprop and click on window desired window
@@ -192,8 +193,9 @@ xrdb ~/.Xresources
 # bluetooth
 ## how to connect to an android 
 - enable and start bluetooth services in linux
-- scan and select linux device name in android and tap on it
+  - sudo systemctl start/enable bluetooth.service
 - run `bluetoothctl` in terminal to enter bluetooth control
+- scan and the linux bluetooth device appear in android. select linux device name in android and tap on it
 - android name will visible on terminal copy it's mac address
 - trust mac address
 - connect mac address
@@ -213,3 +215,47 @@ program path or simple use which <program name>
 
 # dd
 > sudo dd if=/path/to/iso of=/dev/sdX bs=4M status=progress
+
+### Swap Partition Setup in Arch Linux (with Hibernation)
+ - How I set it up properly:
+
+  - Created a dedicated swap partition (/dev/sda2) using a partition manager.
+
+  - Initialized it using:
+
+- sudo mkswap /dev/sda2
+- sudo swapon /dev/sda2
+
+Added it to /etc/fstab:
+
+UUID=<swap-uuid> none swap sw 0 0
+
+    Found UUID via blkid /dev/sda2
+
+Verified it was working with:
+
+    swapon --show
+    free -h
+- check resume UUID( in /etc/fstab) is same as swap partition UUID
+
+⚠️ Mistake I made:
+
+    My GRUB kernel parameters had a wrong resume UUID, pointing to an old or missing swap partition.
+
+    Because of this, hibernation failed or caused issues.
+
+    Also, I expected swap to always show PRIO=100, but it was -2.
+
+💡 What I learned:
+
+    resume=UUID=... in /etc/default/grub must match the swap partition's UUID.
+
+    After fixing the resume UUID and regenerating GRUB:
+
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+    Hibernation started working.
+
+    The -2 swap priority is normal after hibernation:
+    The kernel activates swap during early boot/initramfs, before fstab is read.
+
