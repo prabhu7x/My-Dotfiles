@@ -1,4 +1,27 @@
 
+
+
+import subprocess
+from ranger.api.commands import Command
+
+def move_to_scratchpad():
+    subprocess.run(
+        ["i3-msg", '[title="ranger-fm"] move scratchpad'],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL
+    )
+
+class open_and_hide(Command):
+    def execute(self):
+        file = self.fm.thisfile
+        if file and not file.is_directory:
+            self.fm.execute_file(file)
+            move_to_scratchpad()
+        elif file and file.is_directory:
+            self.fm.cd(file.path)
+
+############ Paste as root #############
+
 from ranger.api.commands import Command
 class paste_as_root(Command):
 	def execute(self):
